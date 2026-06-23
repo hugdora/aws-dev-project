@@ -21,10 +21,7 @@ on:
   push:
     branches:
       - main
-    paths:
-      - '.github/workflows/nest-app.yml'
-      - 'docker/nest-app/**'
-      - 'terraform-module-pro7/nest-app/**'
+  workflow_dispatch:
 
 # --------------------------------------------------------------
 # ENVIRONMENT VARIABLES: Shared across all jobs
