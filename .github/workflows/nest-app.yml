@@ -21,7 +21,10 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
+    paths:
+      - '.github/workflows/nest-app.yml'
+      - 'docker/nest-app/**'
+      - 'terraform-module-pro7/nest-app/**'
 
 # --------------------------------------------------------------
 # ENVIRONMENT VARIABLES: Shared across all jobs
@@ -70,7 +73,7 @@ jobs:
 
       - name: Run Terraform init
         working-directory: ./terraform-module-pro7/nest-app
-        run: terrafrom init
+        run: terraform init
 
       - name: Run Terraform plan
         working-directory: ./terraform-module-pro7/nest-app
