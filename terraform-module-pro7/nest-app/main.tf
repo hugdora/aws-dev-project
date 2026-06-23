@@ -155,7 +155,7 @@ output "website_url" {
 }
 
 output "domain_name" {
-  value = module.ssl_cetificate.domain_name
+  value = module.ssl_certificate.domain_name
 }
 
 output "rds_endpoint" {
