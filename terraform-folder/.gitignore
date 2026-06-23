@@ -1,0 +1,32 @@
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# .tfstate lock files
+.terraform.lock.hcl
+.terraform.lock*
+
+# Sensitive variable files - IMPORTANT!
+*.tfvars
+*.tfvars.json
+
+# Override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Crash log files
+crash.log
+crash.*.log
+
+# Deployment scripts (may contain sensitive data)
+*.sh
+*.tpl
+
+# SSH keys
+*.pem
+*.key

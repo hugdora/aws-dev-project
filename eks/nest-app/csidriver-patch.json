@@ -1,0 +1,10 @@
+﻿{
+  "spec": {
+    "tokenRequests": [
+      {
+        "audience": "sts.amazonaws.com"
+      }
+    ],
+    "requiresRepublish": true
+  }
+}
