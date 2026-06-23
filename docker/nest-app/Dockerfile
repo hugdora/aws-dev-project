@@ -108,14 +108,13 @@ RUN chmod -R 777 /var/www/html \
 # ================================================================
 
 # Update .env variables using BuildKit secret for password
-RUN --mount=type=secret,id=rds_db_password \
-    RDS_DB_PASSWORD=$(cat /run/secrets/rds_db_password) && \
-    sed -i "/^APP_NAME=/ s|=.*$|=${PROJECT_NAME}-${ENVIRONMENT}|" .env && \
+RUN sed -i "/^APP_NAME=/ s|=.*$|=${PROJECT_NAME}-${ENVIRONMENT}|" .env && \
     sed -i "/^APP_URL=/ s|=.*$|=https://${RECORD_NAME}.${DOMAIN_NAME}/|" .env && \
     sed -i "/^DB_HOST=/ s|=.*$|=${RDS_ENDPOINT}|" .env && \
     sed -i "/^DB_DATABASE=/ s|=.*$|=${RDS_DB_NAME}|" .env && \
     sed -i "/^DB_USERNAME=/ s|=.*$|=${RDS_DB_USERNAME}|" .env && \
     sed -i "/^DB_PASSWORD=/ s|=.*$|=${RDS_DB_PASSWORD}|" .env
+
 
 # ================================================================
 # Replace the AppServiceProvider.php file

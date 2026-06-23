@@ -35,9 +35,20 @@ env:
   AWS_ACCOUNT_ID: "127486921697"
   PROJECT_NAME: nest
   ENVIRONMENT: dev
-  IMAGE_NAME: nest
+  IMAGE_NAME: nest-app
   IMAGE_TAG: latest
   TERRAFORM_ACTION: apply
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  RECORD_NAME: www
+  DOMAIN_NAME: dorasws.org
+  GITHUB_USERNAME: hugdora
+  REPOSITORY_NAME: nest-app-project
+  SERVICE_PROVIDER_FILE_NAME: AppServiceProvider
+  APPLICATION_CODE_FILE_NAME: nest
+  RDS_DB_NAME: applicationdb
+  RDS_DB_USERNAME: admin
+  
 
 jobs:
 
@@ -86,6 +97,7 @@ jobs:
         working-directory: ./terraform-module-pro7/nest-app
         run: |
           echo "DOMAIN_NAME=$(terraform output -raw domain_name | cut -d ':' -f1)" >> $GITHUB_ENV
+          echo "RDS_ENDPOINT=$(terraform output -raw rds_endpoint | cut -d ':' -f1)" >> $GITHUB_ENV
           echo "ECS_CLUSTER_NAME=$(terraform output -raw ecs_cluster_name)" >> $GITHUB_ENV
           echo "ECS_SERVICE_NAME=$(terraform output -raw ecs_service_name)" >> $GITHUB_ENV
           echo "ECS_TASK_DEFINITION_NAME=$(terraform output -raw ecs_task_definition_name)" >> $GITHUB_ENV
@@ -104,6 +116,13 @@ jobs:
           --build-arg APPLICATION_CODE_FILE_NAME=nest \
           --build-arg SERVICE_PROVIDER_FILE_NAME=AppServiceProvider \
           --build-arg RDS_DB_PASSWORD=${{ secrets.RDS_DB_PASSWORD }} \
+          --build-arg RDS_ENDPOINT=$RDS_ENDPOINT \
+          --build-arg PROJECT_NAME=$PROJECT_NAME \
+          --build-arg ENVIRONMENT=$ENVIRONMENT \
+          --build-arg RECORD_NAME=$RECORD_NAME \
+          --build-arg DOMAIN_NAME=$DOMAIN_NAME \
+          --build-arg RDS_DB_NAME=$RDS_DB_NAME \
+          --build-arg RDS_DB_USERNAME=$RDS_DB_USERNAME \
           -t $IMAGE_NAME:$IMAGE_TAG \
           -f docker/nest-app/Dockerfile \
             docker/nest-app  
