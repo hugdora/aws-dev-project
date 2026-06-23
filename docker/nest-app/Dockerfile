@@ -6,7 +6,7 @@ WORKDIR /app
 
 COPY nest-app/package*.json ./
 
-RUN npm ci
+RUN npm install
 
 COPY nest-app/ .
 
