@@ -96,8 +96,13 @@ jobs:
       - name: Build Docker image
         run: |
           docker build \
-            -t $IMAGE_NAME:$IMAGE_TAG \
-            -f docker/nest-app/Dockerfile \
+          --build-arg AWS_REGION=eu-west-2 \
+          --build-arg S3_BUCKET=dev-app-dora-webfiles \
+          --build-arg S3_PREFIX=Project-2-assets \
+           --build-arg APPLICATION_CODE_FILE_NAME=nest \
+          --build-arg SERVICE_PROVIDER_FILE_NAME=AppServiceProvider \
+          -t $IMAGE_NAME:$IMAGE_TAG \
+          -f docker/nest-app/Dockerfile \
             docker/nest-app
 
       - name: Tag Docker image
