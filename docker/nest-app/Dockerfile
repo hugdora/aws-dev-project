@@ -27,6 +27,8 @@ ARG RDS_DB_USERNAME
 ARG S3_BUCKET
 ARG S3_PREFIX
 ARG AWS_REGION
+ARG AWS_ACCESS_KEY_ID
+ARG AWS_SECRET_ACCESS_KEY
 
 # ================================================================
 # Define environment variables
@@ -47,6 +49,8 @@ ENV RDS_DB_USERNAME=$RDS_DB_USERNAME
 ENV S3_BUCKET=$S3_BUCKET
 ENV S3_PREFIX=$S3_PREFIX
 ENV AWS_REGION=$AWS_REGION
+ENV AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+ENV AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
 
 # ================================================================
 # Install server dependencies
