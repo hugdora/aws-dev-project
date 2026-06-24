@@ -89,7 +89,7 @@ jobs:
         run: terraform plan
 
       - name: Terraform apply
-        if: env.TERRAFORM_ACTION == 'destroy'
+        if: env.TERRAFORM_ACTION == 'apply'
         working-directory: ./terraform-module-pro7/nest-app
         run: terraform apply -auto-approve
 
